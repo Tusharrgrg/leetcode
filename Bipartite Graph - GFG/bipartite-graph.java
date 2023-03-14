@@ -42,10 +42,9 @@ class Solution
         // Code here
         int[]color = new int[V];
         Arrays.fill(color,-1);
-        boolean flag = false;
         for(int i = 0; i<V;i++){
             if(color[i] ==-1){
-                if(isPartite(adj,color,i) == false){
+                if(isPartite(adj,color,0,i) == false){
                     return false;
                 }
             }
@@ -54,28 +53,42 @@ class Solution
         return true;
     }
     
-     public static boolean isPartite(ArrayList<ArrayList<Integer>> adj,int[]color,int v){
+    //  public static boolean isPartite(ArrayList<ArrayList<Integer>> adj,int[]color,int v){
 
-        Queue<Integer>queue = new LinkedList<>();
-        color[v] = 0;
-        queue.add(v);
+    //     Queue<Integer>queue = new LinkedList<>();
+    //     color[v] = 0;
+    //     queue.add(v);
         
-        while(!queue.isEmpty()){
-            int e = queue.peek();
-            queue.remove();
+    //     while(!queue.isEmpty()){
+    //         int e = queue.peek();
+    //         queue.remove();
 
-            for(int u:adj.get(e)){
-                if(color[u] == -1){
-                    queue.add(u);
-                    color[u] = 1-color[e];
-                }else{
-                    if(color[u]==color[e]){
-                        return false;
-                    }
-                }
+    //         for(int u:adj.get(e)){
+    //             if(color[u] == -1){
+    //                 queue.add(u);
+    //                 color[u] = 1-color[e];
+    //             }else{
+    //                 if(color[u]==color[e]){
+    //                     return false;
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     return true;
+    // }
+    
+    public static boolean isPartite(ArrayList<ArrayList<Integer>>adj,int[]color,int col,int start){
+        // vis[start] = true;
+        color[start] = col;
+
+        for(int u:adj.get(start)){
+            if(color[u]==-1){
+                if(isPartite(adj, color, 1-col, u) == false)return false;
+            }else if(color[u] == col){
+                return false;
             }
         }
-
         return true;
     }
 }
