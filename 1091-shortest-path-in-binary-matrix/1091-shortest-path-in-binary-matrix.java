@@ -10,6 +10,7 @@ class Solution {
         Queue<int[]>q = new LinkedList<>();
         q.add(new int[]{1,0,0});
         dis[0][0] = 1;
+        grid[0][0] = 1;
         if(n == 1)return 1;
         
         while(!q.isEmpty()){
@@ -26,10 +27,12 @@ class Solution {
                     int newCol = col+j;
                     
                     if(newRow>=0 && newCol>=0 && newRow<n && newCol<n && grid[newRow][newCol]==0){
+                        
+                        if(newRow == n-1 && newCol == n-1)return d+1;
                         if(dis[newRow][newCol]>d+1){
                             dis[newRow][newCol] = d+1;
-                            if(newRow == n-1 && newCol == n-1)return d+1;
                             q.add(new int[]{d+1, newRow,newCol});
+                            grid[newRow][newCol] = 1;
                         }
                     }
                 }
