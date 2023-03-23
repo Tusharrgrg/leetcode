@@ -38,11 +38,6 @@ class Solution {
                 }
             }
         }
-        
-         for(int[]a:dis){
-            System.out.println(Arrays.toString(a));
-        }
-        
         return -1;
     }
 }
