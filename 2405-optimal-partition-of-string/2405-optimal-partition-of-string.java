@@ -11,9 +11,6 @@ class Solution {
                 set.add(s.charAt(i));
             }
         }
-        if(set.size()>0){
-            count++;
-        }
-        return count;
+        return count+1;
     }
 }
